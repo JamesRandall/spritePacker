@@ -1,0 +1,554 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		FA08E3582D12A3830043BA1A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FA08E33E2D12A3820043BA1A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FA08E3452D12A3820043BA1A;
+			remoteInfo = "Sprite Packer";
+		};
+		FA08E3622D12A3830043BA1A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FA08E33E2D12A3820043BA1A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FA08E3452D12A3820043BA1A;
+			remoteInfo = "Sprite Packer";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FA08E3462D12A3820043BA1A /* Sprite Packer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sprite Packer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA08E3572D12A3830043BA1A /* Sprite PackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sprite PackerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA08E3612D12A3830043BA1A /* Sprite PackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sprite PackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		FA08E3482D12A3820043BA1A /* Sprite Packer */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Sprite Packer";
+			sourceTree = "<group>";
+		};
+		FA08E35A2D12A3830043BA1A /* Sprite PackerTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Sprite PackerTests";
+			sourceTree = "<group>";
+		};
+		FA08E3642D12A3830043BA1A /* Sprite PackerUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Sprite PackerUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FA08E3432D12A3820043BA1A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA08E3542D12A3830043BA1A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA08E35E2D12A3830043BA1A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FA08E33D2D12A3820043BA1A = {
+			isa = PBXGroup;
+			children = (
+				FA08E3482D12A3820043BA1A /* Sprite Packer */,
+				FA08E35A2D12A3830043BA1A /* Sprite PackerTests */,
+				FA08E3642D12A3830043BA1A /* Sprite PackerUITests */,
+				FA08E3472D12A3820043BA1A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FA08E3472D12A3820043BA1A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FA08E3462D12A3820043BA1A /* Sprite Packer.app */,
+				FA08E3572D12A3830043BA1A /* Sprite PackerTests.xctest */,
+				FA08E3612D12A3830043BA1A /* Sprite PackerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FA08E3452D12A3820043BA1A /* Sprite Packer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA08E36B2D12A3830043BA1A /* Build configuration list for PBXNativeTarget "Sprite Packer" */;
+			buildPhases = (
+				FA08E3422D12A3820043BA1A /* Sources */,
+				FA08E3432D12A3820043BA1A /* Frameworks */,
+				FA08E3442D12A3820043BA1A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				FA08E3482D12A3820043BA1A /* Sprite Packer */,
+			);
+			name = "Sprite Packer";
+			packageProductDependencies = (
+			);
+			productName = "Sprite Packer";
+			productReference = FA08E3462D12A3820043BA1A /* Sprite Packer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FA08E3562D12A3830043BA1A /* Sprite PackerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA08E36E2D12A3830043BA1A /* Build configuration list for PBXNativeTarget "Sprite PackerTests" */;
+			buildPhases = (
+				FA08E3532D12A3830043BA1A /* Sources */,
+				FA08E3542D12A3830043BA1A /* Frameworks */,
+				FA08E3552D12A3830043BA1A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FA08E3592D12A3830043BA1A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				FA08E35A2D12A3830043BA1A /* Sprite PackerTests */,
+			);
+			name = "Sprite PackerTests";
+			packageProductDependencies = (
+			);
+			productName = "Sprite PackerTests";
+			productReference = FA08E3572D12A3830043BA1A /* Sprite PackerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		FA08E3602D12A3830043BA1A /* Sprite PackerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA08E3712D12A3830043BA1A /* Build configuration list for PBXNativeTarget "Sprite PackerUITests" */;
+			buildPhases = (
+				FA08E35D2D12A3830043BA1A /* Sources */,
+				FA08E35E2D12A3830043BA1A /* Frameworks */,
+				FA08E35F2D12A3830043BA1A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FA08E3632D12A3830043BA1A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				FA08E3642D12A3830043BA1A /* Sprite PackerUITests */,
+			);
+			name = "Sprite PackerUITests";
+			packageProductDependencies = (
+			);
+			productName = "Sprite PackerUITests";
+			productReference = FA08E3612D12A3830043BA1A /* Sprite PackerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FA08E33E2D12A3820043BA1A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1610;
+				LastUpgradeCheck = 1610;
+				TargetAttributes = {
+					FA08E3452D12A3820043BA1A = {
+						CreatedOnToolsVersion = 16.1;
+					};
+					FA08E3562D12A3830043BA1A = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = FA08E3452D12A3820043BA1A;
+					};
+					FA08E3602D12A3830043BA1A = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = FA08E3452D12A3820043BA1A;
+					};
+				};
+			};
+			buildConfigurationList = FA08E3412D12A3820043BA1A /* Build configuration list for PBXProject "Sprite Packer" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FA08E33D2D12A3820043BA1A;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = FA08E3472D12A3820043BA1A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FA08E3452D12A3820043BA1A /* Sprite Packer */,
+				FA08E3562D12A3830043BA1A /* Sprite PackerTests */,
+				FA08E3602D12A3830043BA1A /* Sprite PackerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FA08E3442D12A3820043BA1A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA08E3552D12A3830043BA1A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA08E35F2D12A3830043BA1A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FA08E3422D12A3820043BA1A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA08E3532D12A3830043BA1A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA08E35D2D12A3830043BA1A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FA08E3592D12A3830043BA1A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FA08E3452D12A3820043BA1A /* Sprite Packer */;
+			targetProxy = FA08E3582D12A3830043BA1A /* PBXContainerItemProxy */;
+		};
+		FA08E3632D12A3830043BA1A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FA08E3452D12A3820043BA1A /* Sprite Packer */;
+			targetProxy = FA08E3622D12A3830043BA1A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		FA08E3692D12A3830043BA1A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FA08E36A2D12A3830043BA1A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		FA08E36C2D12A3830043BA1A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Sprite Packer/Sprite_Packer.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Sprite Packer/Preview Content\"";
+				DEVELOPMENT_TEAM = VQ2UX5Y5TN;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.accidentalfish.Sprite-Packer";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		FA08E36D2D12A3830043BA1A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Sprite Packer/Sprite_Packer.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Sprite Packer/Preview Content\"";
+				DEVELOPMENT_TEAM = VQ2UX5Y5TN;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.accidentalfish.Sprite-Packer";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		FA08E36F2D12A3830043BA1A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VQ2UX5Y5TN;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.accidentalfish.Sprite-PackerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sprite Packer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Sprite Packer";
+			};
+			name = Debug;
+		};
+		FA08E3702D12A3830043BA1A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VQ2UX5Y5TN;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.accidentalfish.Sprite-PackerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sprite Packer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Sprite Packer";
+			};
+			name = Release;
+		};
+		FA08E3722D12A3830043BA1A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VQ2UX5Y5TN;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.accidentalfish.Sprite-PackerUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Sprite Packer";
+			};
+			name = Debug;
+		};
+		FA08E3732D12A3830043BA1A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VQ2UX5Y5TN;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.accidentalfish.Sprite-PackerUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Sprite Packer";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FA08E3412D12A3820043BA1A /* Build configuration list for PBXProject "Sprite Packer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA08E3692D12A3830043BA1A /* Debug */,
+				FA08E36A2D12A3830043BA1A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA08E36B2D12A3830043BA1A /* Build configuration list for PBXNativeTarget "Sprite Packer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA08E36C2D12A3830043BA1A /* Debug */,
+				FA08E36D2D12A3830043BA1A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA08E36E2D12A3830043BA1A /* Build configuration list for PBXNativeTarget "Sprite PackerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA08E36F2D12A3830043BA1A /* Debug */,
+				FA08E3702D12A3830043BA1A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA08E3712D12A3830043BA1A /* Build configuration list for PBXNativeTarget "Sprite PackerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA08E3722D12A3830043BA1A /* Debug */,
+				FA08E3732D12A3830043BA1A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FA08E33E2D12A3820043BA1A /* Project object */;
+}
