@@ -12,6 +12,27 @@ struct Sprite_PackerApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                //.background(TitlebarBackgroundView())
+                .onAppear {
+                                    if let window = NSApplication.shared.windows.first {
+                                        DispatchQueue.main.async {
+                                            configureWindow(window)
+                                        }
+                                    }
+                                }
         }
     }
+}
+
+private func configureWindow(_ window: NSWindow) {
+    window.styleMask.insert(.fullSizeContentView)
+    window.titlebarSeparatorStyle = .none
+            // Make the titlebar transparent
+            //window.titlebarAppearsTransparent = true
+            
+            // Optionally hide the title itself if you want a clean look
+            //window.titleVisibility = .hidden
+            
+            // Allow dragging the window by clicking anywhere in the background
+            //window.isMovableByWindowBackground = true
 }

@@ -13,11 +13,24 @@ struct PackableImage {
     var path: String
 }
 
+enum Page {
+    case source, svg, output
+}
+
+private let tabs = [
+    TabPickerHeading(label: "SVG Settings", id: Page.svg),
+    TabPickerHeading(label: "Output Settings", id: Page.output),
+]
+
 struct ContentView: View {
+    private var contentBackgroundColor = Color(red: 12.0/255.0, green: 15.0/255.0, blue: 18.0/255.0)
+    
     @State private var widthText = "1024"
     @State private var heightText = "1024"
     @State private var droppedImage: [PackableImage] = []
     @State private var isTargetted: Bool = false
+    @State private var selectedPage : Page = .source
+    @State private var isHoveringOnPack : Bool = false
     
     private func loadDroppedImage(providers: [NSItemProvider]) {
         for provider in providers {
@@ -27,14 +40,26 @@ struct ContentView: View {
                         // Ensure the URL points to a file (and not a remote URL)
                         guard fileURL.isFileURL else { return }
                         
-                        // Load the image from the file URL
-                        if let image = NSImage(contentsOf: fileURL) {
-                            DispatchQueue.main.async {
-                                // Append the image and path
-                                self.droppedImage.append(PackableImage(image: image, path: fileURL.path))
+                        if fileURL.path.hasSuffix(".svg") {
+                            if let image = convertSvgToImage(path: fileURL.path) {
+                                DispatchQueue.main.async {
+                                    // Append the image and path
+                                    self.droppedImage.append(PackableImage(image: image, path: fileURL.path))
+                                }
+                            }
+                            else {
+                                print("Failed to load SVG file: \(fileURL.path)")
                             }
                         } else {
-                            print("Failed to create NSImage from file URL: \(fileURL.path)")
+                            // Load the image from the file URL
+                            if let image = NSImage(contentsOf: fileURL) {
+                                DispatchQueue.main.async {
+                                    // Append the image and path
+                                    self.droppedImage.append(PackableImage(image: image, path: fileURL.path))
+                                }
+                            } else {
+                                print("Failed to create NSImage from file URL: \(fileURL.path)")
+                            }
                         }
                     } else if let error = error {
                         print("Failed to load file URL: \(error.localizedDescription)")
@@ -96,65 +121,80 @@ struct ContentView: View {
         }
     }
     
-    
     var body: some View {
-        VStack(spacing: 16.0) {
+        VStack(spacing: 0.0) {
             HStack {
-                Text("Width")
-                TextField("Output width", text: $widthText)
-                Text("Height")
-                TextField("Output height", text: $heightText)
-                Button(action: {
-                    packImages()
-                }) {
-                    Text("Pack")
-                }
-                .disabled(droppedImage.isEmpty)
+                TabPicker(headings: tabs, selected: $selectedPage, reset: Page.source)
+                Spacer()
+                ToolbarButton(action: { packImages() }, text: "Pack")
+                    .background(
+                        self.isHoveringOnPack && !droppedImage.isEmpty
+                        ? Color(red: 245.0/255.0, green: 145.0/255.0, blue: 22.0/255.0)
+                        : Color(red: 186.0/255.0, green: 105.0/255.0, blue: 0.0/255.0)
+                    )
+                    .disabled(droppedImage.isEmpty)
+                    .onHover(perform: { isHoveringOnPack = $0 })
             }
-            ZStack {
-                if (droppedImage.isEmpty) {
-                    Text("Drop your images here").foregroundStyle(isTargetted ? Color.blue : Color.gray).animation(.easeInOut(duration: 0.3), value: isTargetted)
+            .background(
+                ZStack {
+                    TitlebarBackgroundView()
                 }
-                else {
-                    ScrollView(.vertical) {
-                        Grid {
-                            ForEach(Array(droppedImage.enumerated()), id: \.offset) { offset,packableImage in
-                                GridRow {
-                                    let image = packableImage.image
-                                    if image.size.width > 160.0 || image.size.height > 100.0 {
-                                        Image(nsImage: image).resizable().scaledToFit().frame(width: 160, height: 100)
+            )
+            ZStack {
+                if self.selectedPage == .output {
+                    OutputSettings(widthText: $widthText, heightText: $heightText)
+                        .transition(.move(edge: .top))
+                }
+            }.clipped()
+            VStack(spacing: 16.0) {
+                ZStack {
+                    if (droppedImage.isEmpty) {
+                        Text("Drop your images here").foregroundStyle(isTargetted ? Color.blue : Color.gray).animation(.easeInOut(duration: 0.3), value: isTargetted)
+                    }
+                    else {
+                        ScrollView(.vertical) {
+                            Grid {
+                                ForEach(Array(droppedImage.enumerated()), id: \.offset) { offset,packableImage in
+                                    GridRow {
+                                        let image = packableImage.image
+                                        if image.size.width > 160.0 || image.size.height > 100.0 {
+                                            Image(nsImage: image).resizable().scaledToFit().frame(width: 160, height: 100)
+                                        }
+                                        else {
+                                            Image(nsImage: image)
+                                        }
+                                        Text("\(Int(image.size.width)) x \(Int(image.size.height))")
+                                        Text(packableImage.path).frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                                     }
-                                    else {
-                                        Image(nsImage: image)
-                                    }
-                                    Text("\(Int(image.size.width)) x \(Int(image.size.height))")
-                                    Text(packableImage.path).frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                                    .padding([.bottom, .top], 8.0)
+                                    .id(offset)
                                 }
-                                .padding([.bottom, .top], 8.0)
-                                .id(offset)
                             }
+                            .padding()
                         }
                     }
                 }
-            }
-            .frame(minWidth: 640, maxWidth: .infinity, minHeight: 640.0/(16.0/9.0), maxHeight: .infinity)
-            .overlay {
-                ZStack {
-                    if (droppedImage.isEmpty || isTargetted) {
-                        RoundedRectangle(cornerRadius: 20.0)
-                            .stroke(style: StrokeStyle(lineWidth: 2, dash: [15, 10]))
-                            .foregroundColor(isTargetted ? .blue : .gray)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .frame(minWidth: 640, maxWidth: .infinity, minHeight: 640.0/(16.0/9.0), maxHeight: .infinity)
+                .overlay {
+                    ZStack {
+                        if (droppedImage.isEmpty || isTargetted) {
+                            RoundedRectangle(cornerRadius: 20.0)
+                                .stroke(style: StrokeStyle(lineWidth: 2, dash: [15, 10]))
+                                .foregroundColor(isTargetted ? .blue : .gray)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        }
                     }
+                    .padding()
+                    .animation(.easeInOut(duration: 0.3), value: isTargetted)
                 }
-                .animation(.easeInOut(duration: 0.3), value: isTargetted)
+                .background(contentBackgroundColor)
             }
         }
-        .padding()
         .onDrop(of: [UTType.fileURL], isTargeted: $isTargetted) { providers in
             loadDroppedImage(providers: providers)
             return true
         }
+        .animation(.easeInOut(duration: 0.3), value: selectedPage)
     }
 }
 

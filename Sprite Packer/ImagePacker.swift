@@ -5,6 +5,9 @@
 //  Created by James Randall on 18/12/2024.
 //
 
+// Some good ideas in here for other packing algorithms:
+// https://www.david-colson.com/2020/03/10/exploring-rect-packing.html
+
 import AppKit
 
 struct Rect {
@@ -31,6 +34,7 @@ class BinPacker {
     }
 
     func pack(images: [NSImage]) -> [PackedImage] {
+        let images = images.sorted { ($0.size.width * $0.size.height) > ($1.size.width * $1.size.height) }
         var packedImages: [PackedImage] = []
 
         for image in images {
