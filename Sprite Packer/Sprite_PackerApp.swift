@@ -12,13 +12,16 @@ struct Sprite_PackerApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-            .onAppear {
-                if let window = NSApplication.shared.windows.first {
-                    DispatchQueue.main.async {
-                        configureWindow(window)
+                .onAppear {
+                    if let window = NSApplication.shared.windows.first {
+                        DispatchQueue.main.async {
+                            configureWindow(window)
+                        }
                     }
                 }
-            }
+                .background {
+                    TitlebarBackgroundView()
+                }
         }
     }
     
@@ -32,7 +35,7 @@ struct Sprite_PackerApp: App {
                 //window.titleVisibility = .hidden
                 
                 // Allow dragging the window by clicking anywhere in the background
-                //window.isMovableByWindowBackground = true
+                window.isMovableByWindowBackground = true
     }
 }
 

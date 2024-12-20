@@ -13,6 +13,8 @@ struct PackableImage {
     var path: String
 }
 
+let contentBackgroundColor = Color(red: 12.0/255.0, green: 15.0/255.0, blue: 18.0/255.0)
+
 enum Page {
     case source, svg, output
 }
@@ -23,14 +25,14 @@ private let tabs = [
 ]
 
 struct ContentView: View {
-    private var contentBackgroundColor = Color(red: 12.0/255.0, green: 15.0/255.0, blue: 18.0/255.0)
-    
-    @State private var widthText = "1024"
-    @State private var heightText = "1024"
+    @State private var svgSettings = SvgSettings()
+    @State private var outputSettings = OutputSettings()
     @State private var droppedImage: [PackableImage] = []
     @State private var isTargetted: Bool = false
     @State private var selectedPage : Page = .source
     @State private var isHoveringOnPack : Bool = false
+    @State private var tabPickerHeight: CGFloat = 0 // State variable to store the height
+
     
     private func loadDroppedImage(providers: [NSItemProvider]) {
         for provider in providers {
@@ -70,8 +72,8 @@ struct ContentView: View {
     }
     
     private func packImages() {
-        let binWidth = Int(widthText)!
-        let binHeight = Int(heightText)!
+        let binWidth = Int(outputSettings.widthText)!
+        let binHeight = Int(outputSettings.heightText)!
         let binPacker = BinPacker(binWidth: binWidth, binHeight: binHeight)
         let images = droppedImage.map(\.image)
         let packedImages = binPacker.pack(images: images)
@@ -122,11 +124,11 @@ struct ContentView: View {
     }
     
     var body: some View {
-        VStack(spacing: 0.0) {
+        ZStack(alignment: .topLeading) {
             HStack {
                 TabPicker(headings: tabs, selected: $selectedPage, reset: Page.source)
                 Spacer()
-                ToolbarButton(action: { packImages() }, text: "Pack")
+                ToolbarButton(action: { /*packImages()*/  }, text: "Pack")
                     .background(
                         self.isHoveringOnPack && !droppedImage.isEmpty
                         ? Color(red: 245.0/255.0, green: 145.0/255.0, blue: 22.0/255.0)
@@ -135,66 +137,75 @@ struct ContentView: View {
                     .disabled(droppedImage.isEmpty)
                     .onHover(perform: { isHoveringOnPack = $0 })
             }
-            .background(
+            
+            VStack(spacing: 0.0) {
+                // This is just here to prevent the toolbar above moving when settings options are opened
+                // a greasy greasy hack!
+                ToolbarButton(action: { }, text: "Reset").opacity(0.0).disabled(true)
+                /*.background(
+                 ZStack {
+                 TitlebarBackgroundView()
+                 }
+                 )*/
                 ZStack {
-                    TitlebarBackgroundView()
-                }
-            )
-            ZStack {
-                if self.selectedPage == .output {
-                    OutputSettings(widthText: $widthText, heightText: $heightText)
-                        .transition(.move(edge: .top))
-                }
-            }.clipped()
-            VStack(spacing: 16.0) {
-                ZStack {
-                    if (droppedImage.isEmpty) {
-                        Text("Drop your images here").foregroundStyle(isTargetted ? Color.blue : Color.gray).animation(.easeInOut(duration: 0.3), value: isTargetted)
+                    if self.selectedPage == .output {
+                        OutputSettingsView(settings: $outputSettings)
+                            .transition(.move(edge: .top))
                     }
-                    else {
-                        ScrollView(.vertical) {
-                            Grid {
-                                ForEach(Array(droppedImage.enumerated()), id: \.offset) { offset,packableImage in
-                                    GridRow {
-                                        let image = packableImage.image
-                                        if image.size.width > 160.0 || image.size.height > 100.0 {
-                                            Image(nsImage: image).resizable().scaledToFit().frame(width: 160, height: 100)
-                                        }
-                                        else {
-                                            Image(nsImage: image)
-                                        }
-                                        Text("\(Int(image.size.width)) x \(Int(image.size.height))")
-                                        Text(packableImage.path).frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                                    }
-                                    .padding([.bottom, .top], 8.0)
-                                    .id(offset)
-                                }
-                            }
-                            .padding()
-                        }
+                    else if self.selectedPage == .svg {
+                        SvgSettingsView(settings: $svgSettings)
                     }
-                }
-                .frame(minWidth: 640, maxWidth: .infinity, minHeight: 640.0/(16.0/9.0), maxHeight: .infinity)
-                .overlay {
+                }.clipped()
+                VStack(spacing: 16.0) {
                     ZStack {
-                        if (droppedImage.isEmpty || isTargetted) {
-                            RoundedRectangle(cornerRadius: 20.0)
-                                .stroke(style: StrokeStyle(lineWidth: 2, dash: [15, 10]))
-                                .foregroundColor(isTargetted ? .blue : .gray)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        if (droppedImage.isEmpty) {
+                            Text("Drop your images here").foregroundStyle(isTargetted ? Color.blue : Color.gray).animation(.easeInOut(duration: 0.3), value: isTargetted)
+                        }
+                        else {
+                            ScrollView(.vertical) {
+                                Grid {
+                                    ForEach(Array(droppedImage.enumerated()), id: \.offset) { offset,packableImage in
+                                        GridRow {
+                                            let image = packableImage.image
+                                            if image.size.width > 160.0 || image.size.height > 100.0 {
+                                                Image(nsImage: image).resizable().scaledToFit().frame(width: 160, height: 100)
+                                            }
+                                            else {
+                                                Image(nsImage: image)
+                                            }
+                                            Text("\(Int(image.size.width)) x \(Int(image.size.height))")
+                                            Text(packableImage.path).frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                                        }
+                                        .padding([.bottom, .top], 8.0)
+                                        .id(offset)
+                                    }
+                                }
+                                .padding()
+                            }
                         }
                     }
-                    .padding()
-                    .animation(.easeInOut(duration: 0.3), value: isTargetted)
+                    .frame(minWidth: 640, maxWidth: .infinity, minHeight: 640.0/(16.0/9.0), maxHeight: .infinity)
+                    .overlay {
+                        ZStack {
+                            if (droppedImage.isEmpty || isTargetted) {
+                                RoundedRectangle(cornerRadius: 20.0)
+                                    .stroke(style: StrokeStyle(lineWidth: 2, dash: [15, 10]))
+                                    .foregroundColor(isTargetted ? .blue : .gray)
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            }
+                        }
+                        .padding()
+                        .animation(.easeInOut(duration: 0.3), value: isTargetted)
+                    }
+                    .background(contentBackgroundColor)
                 }
-                .background(contentBackgroundColor)
             }
+            .onDrop(of: [UTType.fileURL], isTargeted: $isTargetted) { providers in
+                loadDroppedImage(providers: providers)
+                return true
+            }
+            .animation(.easeInOut(duration: 0.3), value: selectedPage)
         }
-        .onDrop(of: [UTType.fileURL], isTargeted: $isTargetted) { providers in
-            loadDroppedImage(providers: providers)
-            return true
-        }
-        .animation(.easeInOut(duration: 0.3), value: selectedPage)
     }
 }
 

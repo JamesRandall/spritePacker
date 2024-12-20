@@ -7,18 +7,28 @@
 
 import SwiftUI
 
-struct OutputSettings : View {
-    @Binding var widthText : String
-    @Binding var heightText : String
+@Observable
+class OutputSettings {
+    var widthText : String = "1024"
+    var heightText : String = "1024"
+    var includeIntegerPositions : Bool = true
+    var includeTextureCoordinatePositions : Bool = true
+    var packIntoSingleFile : Bool = false
+}
+
+struct OutputSettingsView : View {
+    @Binding var settings : OutputSettings
     
     var body: some View {
-        HStack {
-            Text("Width")
-            TextField("Output width", text: $widthText)
-            Text("Height")
-            TextField("Output height", text: $heightText)
+        Form {
+            TextField("Width", text: $settings.widthText)
+            TextField("Height", text: $settings.heightText)
+            Toggle("Include integer image positions", isOn: $settings.includeIntegerPositions)
+            Toggle("Include texture coordinate image positions", isOn: $settings.includeTextureCoordinatePositions)
+            Toggle("Pack into single file", isOn: $settings.packIntoSingleFile)
         }
-        .background(TitlebarBackgroundView())
+        //.background(TitlebarBackgroundView())
         .padding()
     }
 }
+
