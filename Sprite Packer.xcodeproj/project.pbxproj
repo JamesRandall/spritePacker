@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		FA08E3842D13E9F10043BA1A /* SVGKit in Frameworks */ = {isa = PBXBuildFile; productRef = FA08E3832D13E9F10043BA1A /* SVGKit */; };
+		FA0F880E2D1712CD0042A22F /* SVGKit in Frameworks */ = {isa = PBXBuildFile; productRef = FA0F880D2D1712CD0042A22F /* SVGKit */; };
+		FA0F88122D1714100042A22F /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = FA0F88112D1714100042A22F /* ArgumentParser */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,16 +29,49 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		FA0F87F92D17121E0042A22F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		FA08E3462D12A3820043BA1A /* Sprite Packer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sprite Packer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA08E3572D12A3830043BA1A /* Sprite PackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sprite PackerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA08E3612D12A3830043BA1A /* Sprite PackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sprite PackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA0F87FB2D17121E0042A22F /* sprite-packer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "sprite-packer"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		FA0F880B2D17129B0042A22F /* Exceptions for "Shared" folder in "sprite-packer" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Extensions/ColorExtensions.swift,
+				Extensions/NSImageExtensions.swift,
+				Images/BinPacker.swift,
+				Images/ImageCombiner.swift,
+				Images/ImageDescription.swift,
+				Images/saveImageToFile.swift,
+				Images/SvgHandling.swift,
+				Model/OutputSettings.swift,
+				Model/PackableImage.swift,
+				Model/PackedImageDescription.swift,
+				Model/SvgSettings.swift,
+			);
+			target = FA0F87FA2D17121E0042A22F /* sprite-packer */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		FA08E3482D12A3820043BA1A /* Sprite Packer */ = {
+		FA08E3482D12A3820043BA1A /* Sprite Packer App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Sprite Packer";
+			path = "Sprite Packer App";
 			sourceTree = "<group>";
 		};
 		FA08E35A2D12A3830043BA1A /* Sprite PackerTests */ = {
@@ -47,6 +82,19 @@
 		FA08E3642D12A3830043BA1A /* Sprite PackerUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Sprite PackerUITests";
+			sourceTree = "<group>";
+		};
+		FA0F87F52D1711670042A22F /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				FA0F880B2D17129B0042A22F /* Exceptions for "Shared" folder in "sprite-packer" target */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		FA0F87FC2D17121E0042A22F /* sprite-packer-cli */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "sprite-packer-cli";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -74,15 +122,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA0F87F82D17121E0042A22F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA0F88122D1714100042A22F /* ArgumentParser in Frameworks */,
+				FA0F880E2D1712CD0042A22F /* SVGKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		FA08E33D2D12A3820043BA1A = {
 			isa = PBXGroup;
 			children = (
-				FA08E3482D12A3820043BA1A /* Sprite Packer */,
+				FA0F87F52D1711670042A22F /* Shared */,
+				FA08E3482D12A3820043BA1A /* Sprite Packer App */,
 				FA08E35A2D12A3830043BA1A /* Sprite PackerTests */,
 				FA08E3642D12A3830043BA1A /* Sprite PackerUITests */,
+				FA0F87FC2D17121E0042A22F /* sprite-packer-cli */,
+				FA0F880C2D1712CD0042A22F /* Frameworks */,
 				FA08E3472D12A3820043BA1A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -93,8 +153,16 @@
 				FA08E3462D12A3820043BA1A /* Sprite Packer.app */,
 				FA08E3572D12A3830043BA1A /* Sprite PackerTests.xctest */,
 				FA08E3612D12A3830043BA1A /* Sprite PackerUITests.xctest */,
+				FA0F87FB2D17121E0042A22F /* sprite-packer */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		FA0F880C2D1712CD0042A22F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -113,7 +181,8 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				FA08E3482D12A3820043BA1A /* Sprite Packer */,
+				FA08E3482D12A3820043BA1A /* Sprite Packer App */,
+				FA0F87F52D1711670042A22F /* Shared */,
 			);
 			name = "Sprite Packer";
 			packageProductDependencies = (
@@ -169,6 +238,30 @@
 			productReference = FA08E3612D12A3830043BA1A /* Sprite PackerUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		FA0F87FA2D17121E0042A22F /* sprite-packer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA0F87FF2D17121E0042A22F /* Build configuration list for PBXNativeTarget "sprite-packer" */;
+			buildPhases = (
+				FA0F87F72D17121E0042A22F /* Sources */,
+				FA0F87F82D17121E0042A22F /* Frameworks */,
+				FA0F87F92D17121E0042A22F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				FA0F87FC2D17121E0042A22F /* sprite-packer-cli */,
+			);
+			name = "sprite-packer";
+			packageProductDependencies = (
+				FA0F880D2D1712CD0042A22F /* SVGKit */,
+				FA0F88112D1714100042A22F /* ArgumentParser */,
+			);
+			productName = "sprite-packer";
+			productReference = FA0F87FB2D17121E0042A22F /* sprite-packer */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -190,6 +283,9 @@
 						CreatedOnToolsVersion = 16.1;
 						TestTargetID = FA08E3452D12A3820043BA1A;
 					};
+					FA0F87FA2D17121E0042A22F = {
+						CreatedOnToolsVersion = 16.1;
+					};
 				};
 			};
 			buildConfigurationList = FA08E3412D12A3820043BA1A /* Build configuration list for PBXProject "Sprite Packer" */;
@@ -203,6 +299,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				FA08E3822D13E9F10043BA1A /* XCRemoteSwiftPackageReference "SVGKit" */,
+				FA0F88102D1714100042A22F /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = FA08E3472D12A3820043BA1A /* Products */;
@@ -212,6 +309,7 @@
 				FA08E3452D12A3820043BA1A /* Sprite Packer */,
 				FA08E3562D12A3830043BA1A /* Sprite PackerTests */,
 				FA08E3602D12A3830043BA1A /* Sprite PackerUITests */,
+				FA0F87FA2D17121E0042A22F /* sprite-packer */,
 			);
 		};
 /* End PBXProject section */
@@ -256,6 +354,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		FA08E35D2D12A3830043BA1A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA0F87F72D17121E0042A22F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -520,6 +625,28 @@
 			};
 			name = Release;
 		};
+		FA0F88002D17121E0042A22F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VQ2UX5Y5TN;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		FA0F88012D17121E0042A22F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VQ2UX5Y5TN;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -559,6 +686,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		FA0F87FF2D17121E0042A22F /* Build configuration list for PBXNativeTarget "sprite-packer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA0F88002D17121E0042A22F /* Debug */,
+				FA0F88012D17121E0042A22F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -570,6 +706,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		FA0F88102D1714100042A22F /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -577,6 +721,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FA08E3822D13E9F10043BA1A /* XCRemoteSwiftPackageReference "SVGKit" */;
 			productName = SVGKit;
+		};
+		FA0F880D2D1712CD0042A22F /* SVGKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA08E3822D13E9F10043BA1A /* XCRemoteSwiftPackageReference "SVGKit" */;
+			productName = SVGKit;
+		};
+		FA0F88112D1714100042A22F /* ArgumentParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA0F88102D1714100042A22F /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

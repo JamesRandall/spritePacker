@@ -71,38 +71,6 @@ struct ContentView: View {
         }
     }
     
-    private func saveImageToFile(url: URL, image: NSImage) {
-        guard let tiffData = image.tiffRepresentation,
-              let bitmapRep = NSBitmapImageRep(data: tiffData) else {
-            print("Failed to create image representation.")
-            return
-        }
-        
-        let imageType: NSBitmapImageRep.FileType
-        if url.pathExtension.lowercased() == "png" {
-            imageType = .png
-        } else if url.pathExtension.lowercased() == "jpeg" || url.pathExtension.lowercased() == "jpg" {
-            imageType = .jpeg
-        } else {
-            imageType = .tiff
-        }
-
-        guard let imageData = bitmapRep.representation(using: imageType, properties: [:]) else {
-            print("Failed to create image data.")
-            return
-        }
-
-        do {
-            try imageData.write(to: url)
-            print("Image saved to \(url.path)")
-        } catch {
-            print("Failed to save image: \(error)")
-        }
-        
-        
-        
-    }
-    
     var body: some View {
         VStack {
             HStack {

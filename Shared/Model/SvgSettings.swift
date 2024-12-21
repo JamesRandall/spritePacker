@@ -9,10 +9,10 @@ import SwiftUI
 
 @Observable
 class SvgSettings {
-    var scaleToFit : Bool = true
+    var scaleToFit : Bool = false
     var widthText: String = "100"
     var heightText: String = "100"
-    var shouldFill : Bool = true
+    var shouldFill : Bool = false
     var fill : Color = Color.black
 }
 

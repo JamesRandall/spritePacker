@@ -7,7 +7,40 @@
 
 import SwiftUI
 
+
 extension Color {
+    init?(hex: String) {
+        // Remove "#" if it exists
+        let sanitizedHex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        
+        // Ensure valid hex length (6 or 8 characters)
+        guard sanitizedHex.count == 6 || sanitizedHex.count == 8 else {
+            return nil
+        }
+        
+        // Convert hex string to integer
+        var hexValue: UInt64 = 0
+        Scanner(string: sanitizedHex).scanHexInt64(&hexValue)
+        
+        let red, green, blue, alpha: Double
+        if sanitizedHex.count == 6 {
+            // RGB format
+            red = Double((hexValue & 0xFF0000) >> 16) / 255.0
+            green = Double((hexValue & 0x00FF00) >> 8) / 255.0
+            blue = Double(hexValue & 0x0000FF) / 255.0
+            alpha = 1.0
+        } else {
+            // ARGB format
+            alpha = Double((hexValue & 0xFF000000) >> 24) / 255.0
+            red = Double((hexValue & 0x00FF0000) >> 16) / 255.0
+            green = Double((hexValue & 0x0000FF00) >> 8) / 255.0
+            blue = Double(hexValue & 0x000000FF) / 255.0
+        }
+        
+        // Initialize the Color
+        self.init(red: red, green: green, blue: blue, opacity: alpha)
+    }
+    
     /// Returns a hex string (e.g. "#FF0000" for red) if the color can be
     /// converted to an RGB or monochrome color space. If `includeAlpha` is true,
     /// it uses the format "#RRGGBBAA".
