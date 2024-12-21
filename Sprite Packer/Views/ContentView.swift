@@ -32,18 +32,41 @@ struct ContentView: View {
         let binPacker = BinPacker(binWidth: binWidth, binHeight: binHeight)
         let packedImages = binPacker.pack(images: droppedImage)
         let combinedImage = ImageCombiner.combine(packedImages: packedImages, binWidth: binWidth, binHeight: binHeight)
-        saveImage(image: combinedImage)
+        let description = createDescription(packedImages: packedImages, combinedImage: combinedImage)
+        saveImage(image: combinedImage, description: description)
     }
     
-    private func saveImage(image: NSImage) {
+    private func saveImage(image: NSImage, description: PackedImagesDescription) {
         let savePanel = NSSavePanel()
         savePanel.title = "Save Image"
         savePanel.allowedContentTypes = [UTType.png, UTType.jpeg, UTType.tiff] // Allowed file formats
-        savePanel.nameFieldStringValue = "output" // Default file name
+        savePanel.nameFieldStringValue = "packed" // Default file name
 
         savePanel.begin { response in
             if response == .OK, let url = savePanel.url {
                 saveImageToFile(url: url, image: image)
+                saveJson(description: description)
+            }
+        }
+    }
+    
+    private func saveJson(description: PackedImagesDescription) {
+        let savePanel = NSSavePanel()
+        savePanel.title = "Save JSON description"
+        savePanel.allowedContentTypes = [UTType.json] // Allowed file formats
+        savePanel.nameFieldStringValue = "packed" // Default file name
+
+        savePanel.begin { response in
+            if response == .OK, let jsonUrl = savePanel.url {
+                do {
+                    let encoder = JSONEncoder()
+                    encoder.outputFormatting = [.prettyPrinted]
+                    let jsonData = try encoder.encode(description)
+                    try jsonData.write(to: jsonUrl)
+                }
+                catch {
+                    print("Error writing JSON to file: \(error)")
+                }
             }
         }
     }
@@ -54,7 +77,7 @@ struct ContentView: View {
             print("Failed to create image representation.")
             return
         }
-
+        
         let imageType: NSBitmapImageRep.FileType
         if url.pathExtension.lowercased() == "png" {
             imageType = .png
@@ -75,6 +98,9 @@ struct ContentView: View {
         } catch {
             print("Failed to save image: \(error)")
         }
+        
+        
+        
     }
     
     var body: some View {
