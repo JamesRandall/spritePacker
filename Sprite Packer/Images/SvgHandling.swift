@@ -8,7 +8,7 @@
 import AppKit
 import SVGKit
 
-func convertSvgToImage(path: String) -> NSImage? {
+func convertSvgToImage(path: String, svgSettings: SvgSettings) -> NSImage? {
     //let svgSource = SVGKSourceLocalFile()
     //svgSource.filePath = path
     guard let svgImage = SVGKImage(contentsOfFile: path) else {
@@ -22,12 +22,24 @@ func convertSvgToImage(path: String) -> NSImage? {
     }
     
     //rootElement.setAttribute("svg:fill", value: "#ff0000")
-    rootElement.setAttributeNS("http://www.w3.org/2000/svg", qualifiedName: "fill", value: "#ff0000")
+    if svgSettings.shouldFill {
+        let hexColor = svgSettings.fill.toHex()
+        rootElement.setAttributeNS("http://www.w3.org/2000/svg", qualifiedName: "fill", value: hexColor)
+    }
     
     guard let nsImage = svgImage.nsImage else {
         print("Could not create NSImage from SVGKImage.")
         return nil
     }
     
-    return nsImage
+    if !svgSettings.scaleToFit {
+        return nsImage
+    }
+    
+    if let intWidth = Int(svgSettings.widthText), let intHeight = Int(svgSettings.heightText) {
+        let width = CGFloat(intWidth)
+        let height = CGFloat(intHeight)
+        return nsImage.scaledToFitCentered(in: NSSize(width: width, height: height))
+    }
+    return nil
 }

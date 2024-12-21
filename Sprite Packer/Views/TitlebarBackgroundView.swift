@@ -13,7 +13,7 @@ struct TitlebarBackgroundView: NSViewRepresentable {
         // Choose a material and blending mode that matches the title bar appearance
         view.material = .titlebar
         view.blendingMode = .withinWindow
-        view.state = .active
+        view.state = .followsWindowActiveState
         return view
     }
 

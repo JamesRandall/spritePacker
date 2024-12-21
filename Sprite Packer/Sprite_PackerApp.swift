@@ -19,14 +19,18 @@ struct Sprite_PackerApp: App {
                         }
                     }
                 }
-                .background {
-                    TitlebarBackgroundView()
-                }
+                
+        }
+        .commands {
+            CommandGroup(replacing: .appSettings) {}
+            CommandGroup(replacing: .newItem) {}
+            CommandGroup(replacing: .toolbar) {}
+            CommandGroup(replacing: .help) {}
         }
     }
     
     private func configureWindow(_ window: NSWindow) {
-        window.styleMask.insert(.fullSizeContentView)
+        //window.styleMask.insert(.fullSizeContentView)
         window.titlebarSeparatorStyle = .none
                 // Make the titlebar transparent
                 //window.titlebarAppearsTransparent = true
@@ -35,7 +39,7 @@ struct Sprite_PackerApp: App {
                 //window.titleVisibility = .hidden
                 
                 // Allow dragging the window by clicking anywhere in the background
-                window.isMovableByWindowBackground = true
+        window.isMovableByWindowBackground = true
     }
 }
 

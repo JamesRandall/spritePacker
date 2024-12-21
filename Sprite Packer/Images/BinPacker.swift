@@ -18,10 +18,24 @@ struct Rect {
 }
 
 struct PackedImage {
+    let name: String
     let image: NSImage
     let frame: Rect
 }
 
+func canPackImages(images: [SourceImage], outputSettings: OutputSettings) -> Bool {
+    guard let binWidth = Int(outputSettings.widthText),let binHeight = Int(outputSettings.heightText) else { return false }
+    let binPacker = BinPacker(binWidth: binWidth, binHeight: binHeight)
+    let packedImages = binPacker.pack(images: images)
+    return packedImages.count == images.count
+}
+
+protocol SourceImage {
+    var image: NSImage { get }
+    var name: String { get }
+}
+
+// This is a pretty simple approach but does the job
 class BinPacker {
     private var freeRectangles: [Rect]
     private let binWidth: Int
@@ -33,16 +47,16 @@ class BinPacker {
         self.freeRectangles = [Rect(x: 0, y: 0, width: binWidth, height: binHeight)]
     }
 
-    func pack(images: [NSImage]) -> [PackedImage] {
-        let images = images.sorted { ($0.size.width * $0.size.height) > ($1.size.width * $1.size.height) }
+    func pack(images: [SourceImage]) -> [PackedImage] {
+        let images = images.sorted { ($0.image.size.width * $0.image.size.height) > ($1.image.size.width * $1.image.size.height) }
         var packedImages: [PackedImage] = []
 
-        for image in images {
-            if let placement = findPlacement(for: Int(image.size.width), Int(image.size.height)) {
-                packedImages.append(PackedImage(image: image, frame: placement))
+        for source in images {
+            if let placement = findPlacement(for: Int(source.image.size.width), Int(source.image.size.height)) {
+                packedImages.append(PackedImage(name: source.name, image: source.image, frame: placement))
                 splitFreeRectangles(for: placement)
             } else {
-                print("Image \(image) could not be packed.")
+                print("Image \(source.name) could not be packed.")
             }
         }
 
