@@ -86,7 +86,7 @@ struct CLI : ParsableCommand {
     }
 }
 
-//CLI.main(["-s", "/Users/jamesrandall/code/starship-tactics/ui-icons"]) //, "--output-size", "256x256"])
-CLI.main()
+CLI.main(["-s", "/Users/jamesrandall/code/starship-tactics/ui-icons"]) //, "--output-size", "256x256"])
+//CLI.main()
 
 

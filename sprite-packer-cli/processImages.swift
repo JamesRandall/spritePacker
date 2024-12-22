@@ -41,11 +41,11 @@ func processImages(sourceFolder: String, options: PackerOptions) {
     saveImageToFile(url: outputImageUrl, image: combinedImage)
     saveDescription(description: description, sourceFolder: sourceFolder, outputPath: options.output.jsonPath ?? "packed.json")
     
-    if packedImages.count == packedImages.count {
+    if packedImages.count == packableImages.count {
         print("All images packed successfully!")
     }
     else {
-        print("Not all images could be packed ( \(packedImages.count) of \(packableImages.count) images were packed). Increase the size of the output image.")
+        print("Not all images could be packed (\(packedImages.count) of \(packableImages.count) images were packed). Increase the size of the output image.")
     }
 }
 
