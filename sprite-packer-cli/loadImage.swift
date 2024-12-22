@@ -13,7 +13,7 @@ func loadImage(_ path: String, svgSettings: SvgSettings) -> PackableImage? {
         let newImage = PackableImage(image: image, path: path)
         return newImage
     } else {
-        guard let image = NSImage(contentsOfFile: path) else { return nil }
+        guard let image = NSImage(contentsOfFile: path)?.cgImage(forProposedRect: nil , context: nil, hints: nil) else { return nil }
         return PackableImage(image: image, path: path)
     }
 }

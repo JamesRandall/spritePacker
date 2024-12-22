@@ -5,12 +5,15 @@
 //  Created by James Randall on 21/12/2024.
 //
 
-import SwiftUI
+import Foundation
+import CoreGraphics
 
 struct PackableImage : Equatable, Hashable, SourceImage {
-    var image: NSImage
+    var image: CGImage
     var path: String
     var name : String { URL(fileURLWithPath: path).deletingPathExtension().lastPathComponent }
+    var width : Int { image.width }
+    var height : Int { image.height }
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(path)

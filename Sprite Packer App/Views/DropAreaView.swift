@@ -28,7 +28,7 @@ struct DropAreaView: View {
                         Grid {
                             ForEach(Array(droppedImage.enumerated()), id: \.offset) { offset,packableImage in
                                 GridRow {
-                                    let image = packableImage.image
+                                    let image = NSImage(cgImage: packableImage.image, size: NSSize(width:packableImage.width, height: packableImage.height))
                                     if image.size.width > 160.0 || image.size.height > 100.0 {
                                         Image(nsImage: image).resizable().scaledToFit().frame(width: 160, height: 100)
                                     }
@@ -68,6 +68,7 @@ struct DropAreaView: View {
     }
     
     private func loadDroppedImage(providers: [NSItemProvider]) {
+        
         let dispatchGroup = DispatchGroup()
         
         for provider in providers {
@@ -98,9 +99,16 @@ struct DropAreaView: View {
                         } else {
                             // Load the image from the file URL
                             if let image = NSImage(contentsOf: fileURL) {
+                                print(image.size)
                                 DispatchQueue.main.async {
                                     // Append the image and path
-                                    self.droppedImage.append(PackableImage(image: image, path: fileURL.path))
+                                    let newImage = PackableImage(image: image.cgImage(forProposedRect: nil, context: nil, hints: nil)!, path: fileURL.path)
+                                    if let index = self.droppedImage.firstIndex(of: newImage) {
+                                        self.droppedImage[index] = newImage
+                                    }
+                                    else {
+                                        self.droppedImage.append(newImage)
+                                    }
                                     dispatchGroup.leave()
                                 }
                             } else {

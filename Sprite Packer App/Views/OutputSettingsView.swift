@@ -16,7 +16,7 @@ struct OutputSettingsView : View {
         Form {
             NumericTextField("Width", text: $settings.widthText)
             NumericTextField("Height", text: $settings.heightText)
-            Toggle("Pack into single file", isOn: $settings.packIntoSingleFile)
+            //Toggle("Pack into single file", isOn: $settings.packIntoSingleFile)
         }
         .padding([.top], 8.0)
         .padding([.leading, .trailing, .bottom])

@@ -8,7 +8,7 @@
 import AppKit
 import SVGKit
 
-func convertSvgToImage(path: String, svgSettings: SvgSettings) -> NSImage? {
+func convertSvgToImage(path: String, svgSettings: SvgSettings) -> CGImage? {
     //let svgSource = SVGKSourceLocalFile()
     //svgSource.filePath = path
     guard let svgImage = SVGKImage(contentsOfFile: path) else {
@@ -33,13 +33,61 @@ func convertSvgToImage(path: String, svgSettings: SvgSettings) -> NSImage? {
     }
     
     if !svgSettings.scaleToFit {
-        return nsImage
+        return nsImage.cgImage(forProposedRect: nil, context: nil, hints: nil)
     }
     
     if let intWidth = Int(svgSettings.widthText), let intHeight = Int(svgSettings.heightText) {
-        let width = CGFloat(intWidth)
-        let height = CGFloat(intHeight)
-        return nsImage.scaledToFitCentered(in: NSSize(width: width, height: height))
+        let targetSize = CGSize(width: CGFloat(intWidth), height: CGFloat(intHeight))
+        
+        // Get CGImage from NSImage
+        guard let cgImage = nsImage.cgImage(forProposedRect: nil, context: nil, hints: nil) else {
+            print("Failed to retrieve CGImage from NSImage")
+            return nil
+        }
+
+        // Create a bitmap context with the target size
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let bitmapInfo = CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue
+        
+        guard let context = CGContext(data: nil,
+                                       width: Int(targetSize.width),
+                                       height: Int(targetSize.height),
+                                       bitsPerComponent: 8,
+                                       bytesPerRow: Int(targetSize.width) * 4,
+                                       space: colorSpace,
+                                       bitmapInfo: bitmapInfo) else {
+            print("Failed to create CGContext")
+            return nil
+        }
+        
+        // Clear the context
+        context.setFillColor(CGColor(red: 0, green: 0, blue: 0, alpha: 0))
+        context.fill(CGRect(origin: .zero, size: targetSize))
+        
+        // Calculate the aspect ratio and fit the image in the target size
+        let imageAspect = CGFloat(cgImage.width) / CGFloat(cgImage.height)
+        let targetAspect = targetSize.width / targetSize.height
+        var drawRect: CGRect
+        
+        if imageAspect > targetAspect {
+            // Image is wider than the target
+            let scaledWidth = targetSize.width
+            let scaledHeight = scaledWidth / imageAspect
+            drawRect = CGRect(x: 0, y: (targetSize.height - scaledHeight) / 2,
+                              width: scaledWidth, height: scaledHeight)
+        } else {
+            // Image is taller than or equal to the target
+            let scaledHeight = targetSize.height
+            let scaledWidth = scaledHeight * imageAspect
+            drawRect = CGRect(x: (targetSize.width - scaledWidth) / 2, y: 0,
+                              width: scaledWidth, height: scaledHeight)
+        }
+        
+        // Draw the image centered in the context
+        context.draw(cgImage, in: drawRect)
+        
+        // Return the resulting CGImage
+        return context.makeImage()
     }
     return nil
 }

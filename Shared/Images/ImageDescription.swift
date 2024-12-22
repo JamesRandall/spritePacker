@@ -7,9 +7,9 @@
 
 import AppKit
 
-func createDescription(packedImages: [PackedImage], combinedImage: NSImage) -> PackedImagesDescription {
-    let width = combinedImage.size.width
-    let height = combinedImage.size.height
+func createDescription(packedImages: [PackedImage], combinedImage: CGImage) -> PackedImagesDescription {
+    let width = CGFloat(combinedImage.width)
+    let height = CGFloat(combinedImage.height)
     return PackedImagesDescription(
         width: Int(width),
         height: Int(height),

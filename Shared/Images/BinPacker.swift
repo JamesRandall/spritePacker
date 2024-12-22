@@ -19,7 +19,7 @@ struct Rect {
 
 struct PackedImage {
     let name: String
-    let image: NSImage
+    let image: CGImage
     let frame: Rect
 }
 
@@ -31,8 +31,10 @@ func canPackImages(images: [SourceImage], outputSettings: OutputSettings) -> Boo
 }
 
 protocol SourceImage {
-    var image: NSImage { get }
+    var image: CGImage { get }
     var name: String { get }
+    var width: Int { get }
+    var height: Int { get }
 }
 
 // This is a pretty simple approach but does the job
@@ -48,11 +50,11 @@ class BinPacker {
     }
 
     func pack(images: [SourceImage]) -> [PackedImage] {
-        let images = images.sorted { ($0.image.size.width * $0.image.size.height) > ($1.image.size.width * $1.image.size.height) }
+        let images = images.sorted { ($0.width * $0.height) > ($1.width * $1.height) }
         var packedImages: [PackedImage] = []
 
         for source in images {
-            if let placement = findPlacement(for: Int(source.image.size.width), Int(source.image.size.height)) {
+            if let placement = findPlacement(for: Int(source.width), Int(source.height)) {
                 packedImages.append(PackedImage(name: source.name, image: source.image, frame: placement))
                 splitFreeRectangles(for: placement)
             } else {

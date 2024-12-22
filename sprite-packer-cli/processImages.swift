@@ -35,7 +35,10 @@ func processImages(sourceFolder: String, options: PackerOptions) {
     let binHeight = options.output.size.height
     let binPacker = BinPacker(binWidth: binWidth, binHeight: binHeight)
     let packedImages = binPacker.pack(images: packableImages)
-    let combinedImage = ImageCombiner.combine(packedImages: packedImages, binWidth: binWidth, binHeight: binHeight)
+    guard let combinedImage = ImageCombiner.combine(packedImages: packedImages, binWidth: binWidth, binHeight: binHeight) else {
+        print("Unable to combine image")
+        return
+    }
     let description = createDescription(packedImages: packedImages, combinedImage: combinedImage)
     
     saveImageToFile(url: outputImageUrl, image: combinedImage)

@@ -6,31 +6,21 @@
 //
 
 import AppKit
+import UniformTypeIdentifiers
 
-func saveImageToFile(url: URL, image: NSImage) {
-    guard let tiffData = image.tiffRepresentation,
-          let bitmapRep = NSBitmapImageRep(data: tiffData) else {
-        print("Failed to create image representation.")
+func saveImageToFile(url: URL, image: CGImage) {
+    guard let destination = CGImageDestinationCreateWithURL(url as CFURL, UTType.png.identifier as CFString, 1, nil) else {
+        print("Failed to create image destination.")
         return
     }
-    
-    let imageType: NSBitmapImageRep.FileType
-    if url.pathExtension.lowercased() == "png" {
-        imageType = .png
-    } else if url.pathExtension.lowercased() == "jpeg" || url.pathExtension.lowercased() == "jpg" {
-        imageType = .jpeg
+
+    // Add the image to the destination
+    CGImageDestinationAddImage(destination, image, nil)
+
+    // Finalize the image destination
+    if CGImageDestinationFinalize(destination) {
+        print("Image saved successfully to \(url.path)")
     } else {
-        imageType = .tiff
-    }
-
-    guard let imageData = bitmapRep.representation(using: imageType, properties: [:]) else {
-        print("Failed to create image data.")
-        return
-    }
-
-    do {
-        try imageData.write(to: url)
-    } catch {
-        print("Failed to save image: \(error)")
+        print("Failed to save image.")
     }
 }

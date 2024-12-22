@@ -42,5 +42,3 @@ struct Sprite_PackerApp: App {
         window.isMovableByWindowBackground = true
     }
 }
-
-

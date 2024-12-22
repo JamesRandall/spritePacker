@@ -31,12 +31,12 @@ struct ContentView: View {
         guard let binWidth = Int(outputSettings.widthText),let binHeight = Int(outputSettings.heightText) else { return }
         let binPacker = BinPacker(binWidth: binWidth, binHeight: binHeight)
         let packedImages = binPacker.pack(images: droppedImage)
-        let combinedImage = ImageCombiner.combine(packedImages: packedImages, binWidth: binWidth, binHeight: binHeight)
+        guard let combinedImage = ImageCombiner.combine(packedImages: packedImages, binWidth: binWidth, binHeight: binHeight) else { return }
         let description = createDescription(packedImages: packedImages, combinedImage: combinedImage)
         saveImage(image: combinedImage, description: description)
     }
     
-    private func saveImage(image: NSImage, description: PackedImagesDescription) {
+    private func saveImage(image: CGImage, description: PackedImagesDescription) {
         let savePanel = NSSavePanel()
         savePanel.title = "Save Image"
         savePanel.allowedContentTypes = [UTType.png, UTType.jpeg, UTType.tiff] // Allowed file formats
@@ -106,7 +106,7 @@ struct ContentView: View {
             .animation(.easeInOut(duration: 0.3), value: selectedPage)
         }
         .background(TitlebarBackgroundView())
-        .frame(minWidth: 640, minHeight: 480)
+        .frame(minWidth: 720, minHeight: 422) // size of a Mac App Store image of 1440x900
     }
 }
 
