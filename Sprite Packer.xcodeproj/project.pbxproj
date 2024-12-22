@@ -46,6 +46,7 @@
 		FA08E3572D12A3830043BA1A /* Sprite PackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sprite PackerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA08E3612D12A3830043BA1A /* Sprite PackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sprite PackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA0F87FB2D17121E0042A22F /* sprite-packer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "sprite-packer"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA0F889E2D1867250042A22F /* Sprite-Packer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Sprite-Packer-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -137,6 +138,7 @@
 		FA08E33D2D12A3820043BA1A = {
 			isa = PBXGroup;
 			children = (
+				FA0F889E2D1867250042A22F /* Sprite-Packer-Info.plist */,
 				FA0F87F52D1711670042A22F /* Shared */,
 				FA08E3482D12A3820043BA1A /* Sprite Packer App */,
 				FA08E35A2D12A3830043BA1A /* Sprite PackerTests */,
@@ -510,12 +512,13 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Sprite Packer App/Preview Content\"";
 				DEVELOPMENT_TEAM = VQ2UX5Y5TN;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Sprite-Packer-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -539,12 +542,13 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Sprite Packer App/Preview Content\"";
 				DEVELOPMENT_TEAM = VQ2UX5Y5TN;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Sprite-Packer-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
