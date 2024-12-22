@@ -65,7 +65,9 @@ struct CLI : ParsableCommand {
         let jsonData = try? jsonEncoder.encode(samplePackerOptions)
         let jsonString = (jsonData != nil ? String(data: jsonData!, encoding: .utf8) : "") ?? ""
         
-        return CommandConfiguration(discussion: "This tool will pack images into a single PNG file and generate a JSON index for that file. In addition to the options described here sprite packer will look for a file called sprite-packer.json in the source folder and merge the ones you specify into it. Sample json is shown below:\n\n\(jsonString)\n")
+        return CommandConfiguration(
+            discussion: "This tool will pack images into a single PNG file and generate a JSON index for that file. In addition to the options described here sprite packer will look for a file called sprite-packer.json in the source folder and merge the ones you specify into it. Sample json is shown below:\n\n\(jsonString)\n",
+            version: "1.0.0")
     }
     
     func run() {
@@ -84,8 +86,7 @@ struct CLI : ParsableCommand {
     }
 }
 
-//CLI.main(["-h"])
-//CLI.main(["-s", "/Users/jamesrandall/code/starship-tactics/ui-icons"])
+//CLI.main(["-s", "/Users/jamesrandall/code/starship-tactics/ui-icons"]) //, "--output-size", "256x256"])
 CLI.main()
 
 

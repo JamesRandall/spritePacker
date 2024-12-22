@@ -24,8 +24,13 @@ func processImages(sourceFolder: String, options: PackerOptions) {
     svgSettings.shouldFill = options.svg.fill != nil
     svgSettings.fill = options.svg.fill?.toColor() ?? Color.black
     
+    let outputImageOption = options.output.imagePath ?? "packed.png"
+    let outputImageUrl = outputImageOption.hasPrefix("/") ? URL(fileURLWithPath: outputImageOption) : URL(fileURLWithPath: sourceFolder).appendingPathComponent(outputImageOption.hasPrefix("./") ? String(outputImageOption.dropFirst(2)) : outputImageOption)
+    
     let packableImages = findFiles(in: sourceFolder, matching: imageTypes)
+        .filter({URL(fileURLWithPath: $0) != outputImageUrl})
         .compactMap({loadImage($0, svgSettings: svgSettings)})
+        
     let binWidth = options.output.size.width
     let binHeight = options.output.size.height
     let binPacker = BinPacker(binWidth: binWidth, binHeight: binHeight)
@@ -33,13 +38,15 @@ func processImages(sourceFolder: String, options: PackerOptions) {
     let combinedImage = ImageCombiner.combine(packedImages: packedImages, binWidth: binWidth, binHeight: binHeight)
     let description = createDescription(packedImages: packedImages, combinedImage: combinedImage)
     
-    saveImage(image: combinedImage, sourceFolder: sourceFolder, outputPath: options.output.imagePath ?? "packed.png")
+    saveImageToFile(url: outputImageUrl, image: combinedImage)
     saveDescription(description: description, sourceFolder: sourceFolder, outputPath: options.output.jsonPath ?? "packed.json")
-}
-
-private func saveImage(image: NSImage, sourceFolder: String, outputPath: String) {
-    let outputUrl = outputPath.hasPrefix("/") ? URL(fileURLWithPath: outputPath) : URL(fileURLWithPath: sourceFolder).appendingPathComponent(outputPath)
-    saveImageToFile(url: outputUrl, image: image)
+    
+    if packedImages.count == packedImages.count {
+        print("All images packed successfully!")
+    }
+    else {
+        print("Not all images could be packed ( \(packedImages.count) of \(packableImages.count) images were packed). Increase the size of the output image.")
+    }
 }
 
 private func saveDescription(description: PackedImagesDescription, sourceFolder: String, outputPath: String) {
