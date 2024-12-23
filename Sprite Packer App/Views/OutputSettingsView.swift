@@ -27,7 +27,7 @@ struct OutputSettingsView : View {
     private func checkFit() {
         let imagesToCheck = droppedImage
         DispatchQueue.global().async {
-            let canPack = canPackImages(images: imagesToCheck, outputSettings: settings)
+            let (canPack,_) = canPackImages(images: imagesToCheck, outputSettings: settings)
             DispatchQueue.main.async {
                 canPackAll = canPack;
             }

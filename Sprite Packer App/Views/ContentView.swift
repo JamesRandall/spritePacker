@@ -89,7 +89,7 @@ struct ContentView: View {
             VStack(spacing: 0.0) {
                 if !self.canPackAll {
                     VStack {
-                        Text("Insufficient space in output image for all images to be packed. Try increasing the size in output settings.")
+                        Text("Insufficient space in output image for all images to be packed. Increase the output size or remove the images with warnings.")
                             .foregroundStyle(.red)
                             .padding([.top,.bottom], 8.0)
                     }

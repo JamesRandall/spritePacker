@@ -23,18 +23,22 @@ struct PackedImage {
     let frame: Rect
 }
 
-func canPackImages(images: [SourceImage], outputSettings: OutputSettings) -> Bool {
-    guard let binWidth = Int(outputSettings.widthText),let binHeight = Int(outputSettings.heightText) else { return false }
-    let binPacker = BinPacker(binWidth: binWidth, binHeight: binHeight)
-    let packedImages = binPacker.pack(images: images)
-    return packedImages.count == images.count
-}
-
 protocol SourceImage {
     var image: CGImage { get }
+    var path: String { get }
     var name: String { get }
     var width: Int { get }
     var height: Int { get }
+}
+
+func canPackImages(images: [SourceImage], outputSettings: OutputSettings) -> (Bool, [SourceImage]) {
+    guard let binWidth = Int(outputSettings.widthText),let binHeight = Int(outputSettings.heightText) else { return (false,[]) }
+    let binPacker = BinPacker(binWidth: binWidth, binHeight: binHeight)
+    let packedImages = binPacker.pack(images: images)
+    return (
+        packedImages.count == images.count,
+        images.filter({ si in !packedImages.contains(where: { pi in pi.name == si.name }) })
+    )
 }
 
 // This is a pretty simple approach but does the job
