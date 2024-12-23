@@ -8,12 +8,13 @@
 import Foundation
 import CoreGraphics
 
-struct PackableImage : Equatable, Hashable, SourceImage {
+struct PackableImage : Identifiable,Equatable, Hashable, SourceImage {
     var image: CGImage
     var path: String
     var name : String { URL(fileURLWithPath: path).deletingPathExtension().lastPathComponent }
     var width : Int { image.width }
     var height : Int { image.height }
+    var id : String { path }
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(path)

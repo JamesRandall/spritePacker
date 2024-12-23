@@ -9,6 +9,33 @@ import Foundation
 import SwiftUI
 import UniformTypeIdentifiers
 let contentBackgroundColor = Color(red: 12.0/255.0, green: 15.0/255.0, blue: 18.0/255.0)
+private let icon = Image("trash-can")
+
+struct PackableImageRow: View {
+    let packableImage: PackableImage
+    let onRemove : () -> Void
+    @State private var isHovered = false
+    
+    var body: some View {
+        GridRow {
+            let image = NSImage(cgImage: packableImage.image, size: NSSize(width:packableImage.width, height: packableImage.height))
+            if image.size.width > 160.0 || image.size.height > 100.0 {
+                Image(nsImage: image).resizable().scaledToFit().frame(width: 160, height: 100)
+            }
+            else {
+                Image(nsImage: image)
+            }
+            Text("\(Int(image.size.width)) x \(Int(image.size.height))")
+            Text(packableImage.path).frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            ToolbarButton(action: { self.onRemove() }, icon: icon)
+                .background(Color(red: 203.0/255.0, green: 43.0/255.0, blue: 43.0/255.0))
+                .opacity(isHovered ? 1.0 : 0.0)
+                .cornerRadius(8.0)
+        }
+        .padding([.bottom, .top], 8.0)
+        .onHover(perform: { isHover in isHovered = isHover })
+    }
+}
 
 struct DropAreaView: View {
     @Binding var droppedImage: [PackableImage]
@@ -16,6 +43,7 @@ struct DropAreaView: View {
     @Binding var canPackAll: Bool
     var outputSettings: OutputSettings
     @State private var isTargetted: Bool = false
+    @State private var highlightedRow : String?
     
     var body: some View {
         VStack(spacing: 16.0) {
@@ -26,20 +54,8 @@ struct DropAreaView: View {
                 else {
                     ScrollView(.vertical) {
                         Grid {
-                            ForEach(Array(droppedImage.enumerated()), id: \.offset) { offset,packableImage in
-                                GridRow {
-                                    let image = NSImage(cgImage: packableImage.image, size: NSSize(width:packableImage.width, height: packableImage.height))
-                                    if image.size.width > 160.0 || image.size.height > 100.0 {
-                                        Image(nsImage: image).resizable().scaledToFit().frame(width: 160, height: 100)
-                                    }
-                                    else {
-                                        Image(nsImage: image)
-                                    }
-                                    Text("\(Int(image.size.width)) x \(Int(image.size.height))")
-                                    Text(packableImage.path).frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                                }
-                                .padding([.bottom, .top], 8.0)
-                                .id(offset)
+                            ForEach(droppedImage, id: \.path) { packableImage in
+                                PackableImageRow(packableImage: packableImage, onRemove: { droppedImage.removeAll(where: { $0.path == packableImage.path } ) })
                             }
                         }
                         .padding()

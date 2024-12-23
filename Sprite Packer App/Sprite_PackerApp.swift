@@ -23,22 +23,15 @@ struct Sprite_PackerApp: App {
         }
         .commands {
             CommandGroup(replacing: .appSettings) {}
-            CommandGroup(replacing: .newItem) {}
             CommandGroup(replacing: .toolbar) {}
             CommandGroup(replacing: .help) {}
         }
     }
     
     private func configureWindow(_ window: NSWindow) {
-        //window.styleMask.insert(.fullSizeContentView)
         window.titlebarSeparatorStyle = .none
-                // Make the titlebar transparent
-                //window.titlebarAppearsTransparent = true
-                
-                // Optionally hide the title itself if you want a clean look
-                //window.titleVisibility = .hidden
-                
-                // Allow dragging the window by clicking anywhere in the background
+        //window.titlebarAppearsTransparent = true
+        //window.titleVisibility = .hidden
         window.isMovableByWindowBackground = true
     }
 }

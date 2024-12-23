@@ -9,14 +9,20 @@ import SwiftUI
 
 struct ToolbarButton : View {
     var action: () -> ()
-    var text: String
+    var text: String = ""
+    var icon: Image?
     
     var body: some View {
         Button(action:self.action) {
             HStack {
-                Text(text)
-                    .padding([.leading, .trailing], 32.0)
-                    .padding([.top, .bottom], 8.0)
+                if let icon = icon {
+                    icon.padding(8.0)
+                } else {
+                    Text(text)
+                        .padding([.leading, .trailing], 32.0)
+                        .padding([.top, .bottom], 8.0)
+                }
+                
             }
             .contentShape(Rectangle())
         }

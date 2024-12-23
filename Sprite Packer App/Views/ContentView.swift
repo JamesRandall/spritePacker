@@ -39,7 +39,7 @@ struct ContentView: View {
     private func saveImage(image: CGImage, description: PackedImagesDescription) {
         let savePanel = NSSavePanel()
         savePanel.title = "Save Image"
-        savePanel.allowedContentTypes = [UTType.png, UTType.jpeg, UTType.tiff] // Allowed file formats
+        savePanel.allowedContentTypes = [UTType.png] // Allowed file formats
         savePanel.nameFieldStringValue = "packed" // Default file name
 
         savePanel.begin { response in
@@ -89,7 +89,9 @@ struct ContentView: View {
             VStack(spacing: 0.0) {
                 if !self.canPackAll {
                     VStack {
-                        Text("Insufficient space in output image for all images to be packed. Try increasing the size in output settings.").foregroundStyle(.red)
+                        Text("Insufficient space in output image for all images to be packed. Try increasing the size in output settings.")
+                            .foregroundStyle(.red)
+                            .padding([.top,.bottom], 8.0)
                     }
                 }
                 ZStack {
