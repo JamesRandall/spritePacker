@@ -19,7 +19,7 @@ func createDescription(packedImages: [PackedImage], combinedImage: CGImage) -> P
                 path: packedImage.path,
                 location: ImageLocation(
                     x: packedImage.frame.x,
-                    y: packedImage.frame.y,
+                    y: Int(height - CGFloat(packedImage.frame.y) - CGFloat(packedImage.frame.height)),
                     width: packedImage.frame.width,
                     height: packedImage.frame.height),
                 textureCoordinates: TextureCoordinates(

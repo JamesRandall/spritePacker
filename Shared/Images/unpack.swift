@@ -34,7 +34,6 @@ func unpack(file: SpritePackerFile) -> [PackableImage] {
                 }
             }
             
-            return extractImage(source:sourcePackedImage, packedImage: packedImage)
         }
         else {
             if let image = NSImage(contentsOf: URL(fileURLWithPath: packedImage.path))?.cgImage(forProposedRect: nil, context: nil, hints: nil) {
@@ -43,8 +42,9 @@ func unpack(file: SpritePackerFile) -> [PackableImage] {
                     path: packedImage.path
                 )
             }
-            return extractImage(source:sourcePackedImage, packedImage: packedImage)
+            
         }
+        return extractImage(source:sourcePackedImage, packedImage: packedImage)
     })
     return result
 }

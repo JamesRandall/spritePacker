@@ -36,7 +36,10 @@ struct Sprite_PackerApp: App {
                         panel.canChooseDirectories = false
                         
                         if panel.runModal() == .OK, let url = panel.url {
-                            openWindow(id: "spritepacker", value: SpritePackerFile(imageUrl: url, jsonUrl: url))
+                            let filename = url.deletingPathExtension().lastPathComponent
+                            let imageUrl = url.deletingLastPathComponent().appendingPathComponent("\(filename).png")
+                            print(imageUrl)
+                            openWindow(id: "spritepacker", value: SpritePackerFile(imageUrl: imageUrl, jsonUrl: url))
                         }
                 }
                 .keyboardShortcut("O", modifiers: [.command])

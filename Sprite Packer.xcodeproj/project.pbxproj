@@ -515,7 +515,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"Sprite Packer App/Preview Content\"";
 				DEVELOPMENT_TEAM = VQ2UX5Y5TN;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -545,7 +545,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"Sprite Packer App/Preview Content\"";
 				DEVELOPMENT_TEAM = VQ2UX5Y5TN;
 				ENABLE_HARDENED_RUNTIME = YES;
