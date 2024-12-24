@@ -40,8 +40,8 @@ struct ContentView: View {
                     generateAppIcon(magnification: 512.0 / 1024.0, size: 512, name: "AppIcon_512.png", folder: folder)
                     generateAppIcon(magnification: 256.0 / 1024.0, size: 256, name: "AppIcon_256.png", folder: folder)
                     generateAppIcon(magnification: 128.0 / 1024.0, size: 128, name: "AppIcon_128.png", folder: folder)
-                    generateAppIcon(magnification: 64.0 / 1024.0, size: 64, name: "AppIcon_64.png", folder: folder)
-                    generateAppIcon(magnification: 32.0 / 1024.0, size: 32, name: "AppIcon_32.png", folder: folder)
+                    generateAppIcon(magnification: 64.0 / 1024.0, size: 64, name: "AppIcon_64.png", offset: 1, limit: 3, folder: folder)
+                    generateAppIcon(magnification: 32.0 / 1024.0, size: 32, name: "AppIcon_32.png", offset: 1, limit: 3, folder: folder)
                 }
             }
         }

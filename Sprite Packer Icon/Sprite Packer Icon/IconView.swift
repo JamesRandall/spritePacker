@@ -53,15 +53,24 @@ struct AppIconView : View {
     var cornerRadius : CGFloat = 204
     var innerCornerRadius: CGFloat = 32
     var spacing : CGFloat = 30
+    var offset : Int = 0
+    var limit : Int = 5
     
     var magnification = 1.0
     
     var body: some View {
+        let rowsToRender = rows.enumerated().compactMap({ i,r in
+            i >= offset && i < (offset+limit) ? r.enumerated().compactMap({i2, r2 in
+                i2 >= offset && i2 < (offset+limit) ? r2 : nil
+            }) : nil
+        })
+        
+        
         ZStack {
             ZStack {
-                VStack(spacing: spacing * magnification) {
-                    ForEach(Array(rows.enumerated()), id: \.offset) { row in
-                        HStack(spacing: spacing * magnification) {
+                VStack(spacing: max(spacing * magnification, 1.0)) {
+                    ForEach(Array(rowsToRender.enumerated()), id: \.offset) { row in
+                        HStack(spacing: max(spacing * magnification, 1.0)) {
                             ForEach(Array(row.element.enumerated()), id: \.offset) { _,column in
                                 RoundedRectangle(cornerRadius: innerCornerRadius * magnification)
                                     .fill(Color(red: CGFloat(column[0]) / 255.0, green: CGFloat(column[1]) / 255.0, blue: CGFloat(column[2]) / 255.0))

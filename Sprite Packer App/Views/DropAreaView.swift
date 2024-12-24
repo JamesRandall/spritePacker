@@ -14,10 +14,12 @@ struct DropAreaView: View {
     @Binding var droppedImage: [PackableImage]
     @Binding var svgSettings: SvgSettings
     @Binding var canPackAll: Bool
+    @Binding var isTargetted : Bool
+    @Binding var warningImagePaths : Set<String>
     var outputSettings: OutputSettings
-    @State private var isTargetted: Bool = false
+    var checkImages : () -> ()
     @State private var highlightedRow : String?
-    @State private var warningImagePaths : Set<String> = []
+    
     
     var body: some View {
         VStack(spacing: 16.0) {
@@ -28,7 +30,7 @@ struct DropAreaView: View {
                 else {
                     ScrollView(.vertical) {
                         Grid {
-                            ForEach(droppedImage, id: \.path) { packableImage in
+                            ForEach(droppedImage, id:\.id) { packableImage in
                                 PackableImageRow(
                                     packableImage: packableImage,
                                     isWarning: warningImagePaths.contains(packableImage.path),
@@ -56,80 +58,6 @@ struct DropAreaView: View {
                 .animation(.easeInOut(duration: 0.3), value: isTargetted)
             }
             .background(contentBackgroundColor)
-        }
-        .onDrop(of: [UTType.fileURL], isTargeted: $isTargetted) { providers in
-            loadDroppedImage(providers: providers)
-            return true
-        }
-    }
-    
-    private func loadDroppedImage(providers: [NSItemProvider]) {
-        
-        let dispatchGroup = DispatchGroup()
-        
-        for provider in providers {
-            if provider.canLoadObject(ofClass: URL.self) {
-                dispatchGroup.enter()
-                let _ = provider.loadObject(ofClass: URL.self) { object, error in
-                    if let fileURL = object {
-                        // Ensure the URL points to a file (and not a remote URL)
-                        guard fileURL.isFileURL else { return }
-                        
-                        if fileURL.path.hasSuffix(".svg") {
-                            if let image = convertSvgToImage(path: fileURL.path, svgSettings: svgSettings) {
-                                DispatchQueue.main.async {
-                                    let newImage = PackableImage(image: image, path: fileURL.path)
-                                    if let index = self.droppedImage.firstIndex(of: newImage) {
-                                        self.droppedImage[index] = newImage
-                                    }
-                                    else {
-                                        self.droppedImage.append(newImage)
-                                    }
-                                    dispatchGroup.leave()
-                                }
-                            }
-                            else {
-                                print("Failed to load SVG file: \(fileURL.path)")
-                                dispatchGroup.leave()
-                            }
-                        } else {
-                            // Load the image from the file URL
-                            if let image = NSImage(contentsOf: fileURL) {
-                                print(image.size)
-                                DispatchQueue.main.async {
-                                    // Append the image and path
-                                    let newImage = PackableImage(image: image.cgImage(forProposedRect: nil, context: nil, hints: nil)!, path: fileURL.path)
-                                    if let index = self.droppedImage.firstIndex(of: newImage) {
-                                        self.droppedImage[index] = newImage
-                                    }
-                                    else {
-                                        self.droppedImage.append(newImage)
-                                    }
-                                    dispatchGroup.leave()
-                                }
-                            } else {
-                                print("Failed to create NSImage from file URL: \(fileURL.path)")
-                                dispatchGroup.leave()
-                            }
-                        }
-                    } else if let error = error {
-                        print("Failed to load file URL: \(error.localizedDescription)")
-                        dispatchGroup.leave()
-                    }
-                }
-            }
-        }
-        dispatchGroup.notify(queue: DispatchQueue.global()) {
-            checkImages()
-        }
-    }
-    
-    private func checkImages() {
-        let imagesToCheck = droppedImage
-        let (canPack,missingImages) = canPackImages(images: imagesToCheck, outputSettings: outputSettings)
-        DispatchQueue.main.async {
-            canPackAll = canPack;
-            warningImagePaths = Set(missingImages.map(\.path))
         }
     }
 }

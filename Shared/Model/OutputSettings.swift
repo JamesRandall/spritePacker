@@ -12,4 +12,7 @@ class OutputSettings {
     var widthText : String = "1024"
     var heightText : String = "1024"
     var packIntoSingleFile : Bool = false
+    var outputFolder : String = ""
+    var outputFileName : String = "packed"
+    var outputFolderIsValid = true
 }

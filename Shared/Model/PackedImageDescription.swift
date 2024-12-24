@@ -21,8 +21,10 @@ struct TextureCoordinates : Codable {
 
 struct PackedImageDescription : Codable {
     var name: String
+    var path: String
     var location: ImageLocation
     var textureCoordinates: TextureCoordinates
+    var svgFill : String?
 }
 
 struct PackedImagesDescription : Codable {

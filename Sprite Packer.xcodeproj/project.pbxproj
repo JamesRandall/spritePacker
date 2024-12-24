@@ -55,14 +55,17 @@
 			membershipExceptions = (
 				Extensions/ColorExtensions.swift,
 				Extensions/NSImageExtensions.swift,
+				Extensions/URLExtensions.swift,
 				Images/BinPacker.swift,
 				Images/ImageCombiner.swift,
 				Images/ImageDescription.swift,
 				Images/saveImageToFile.swift,
 				Images/SvgHandling.swift,
+				Images/unpack.swift,
 				Model/OutputSettings.swift,
 				Model/PackableImage.swift,
 				Model/PackedImageDescription.swift,
+				Model/SpritePackerFile.swift,
 				Model/SvgSettings.swift,
 			);
 			target = FA0F87FA2D17121E0042A22F /* sprite-packer */;
@@ -512,7 +515,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Sprite Packer App/Preview Content\"";
 				DEVELOPMENT_TEAM = VQ2UX5Y5TN;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -542,7 +545,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Sprite Packer App/Preview Content\"";
 				DEVELOPMENT_TEAM = VQ2UX5Y5TN;
 				ENABLE_HARDENED_RUNTIME = YES;

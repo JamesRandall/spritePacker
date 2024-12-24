@@ -16,6 +16,7 @@ func createDescription(packedImages: [PackedImage], combinedImage: CGImage) -> P
         images: packedImages.map { packedImage in
             PackedImageDescription(
                 name: packedImage.name,
+                path: packedImage.path,
                 location: ImageLocation(
                     x: packedImage.frame.x,
                     y: packedImage.frame.y,
@@ -26,7 +27,8 @@ func createDescription(packedImages: [PackedImage], combinedImage: CGImage) -> P
                     v: CGFloat(packedImage.frame.y) / height,
                     u2: CGFloat(packedImage.frame.x + packedImage.frame.width) / width,
                     v2: CGFloat(packedImage.frame.y + packedImage.frame.height) / height
-                )
+                ),
+                svgFill: packedImage.svgFill
             )
         }
     )

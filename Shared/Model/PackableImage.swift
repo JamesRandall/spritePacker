@@ -14,13 +14,17 @@ struct PackableImage : Identifiable,Equatable, Hashable, SourceImage {
     var name : String { URL(fileURLWithPath: path).deletingPathExtension().lastPathComponent }
     var width : Int { image.width }
     var height : Int { image.height }
-    var id : String { path }
+    var id : String { "\(path)_\(width)_\(height)" }
+    var svgFill : String?
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(path)
+        hasher.combine(width)
+        hasher.combine(height)
     }
     
     static func == (lhs: PackableImage, rhs: PackableImage) -> Bool {
-        lhs.path == rhs.path
+        let result = lhs.path == rhs.path && lhs.width == rhs.width && lhs.height == rhs.height
+        return result
     }
 }

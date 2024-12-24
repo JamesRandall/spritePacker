@@ -42,8 +42,8 @@ extension View {
     }
 }
 
-func generateAppIcon(magnification: CGFloat, size: CGFloat, name: String, folder: URL?) -> some View {
-    let appIconView = AppIconView(magnification: magnification / 2.0)
+func generateAppIcon(magnification: CGFloat, size: CGFloat, name: String, offset: Int = 0, limit: Int = 5, folder: URL?) -> some View {
+    let appIconView = AppIconView(offset: offset, limit: limit, magnification: magnification / 2.0)
     guard let image = appIconView.snapshot() else { return appIconView }
     
     if let folder = folder {

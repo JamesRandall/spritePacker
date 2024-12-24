@@ -19,8 +19,10 @@ struct Rect {
 
 struct PackedImage {
     let name: String
+    let path: String
     let image: CGImage
     let frame: Rect
+    let svgFill: String?
 }
 
 protocol SourceImage {
@@ -29,6 +31,7 @@ protocol SourceImage {
     var name: String { get }
     var width: Int { get }
     var height: Int { get }
+    var svgFill: String? { get }
 }
 
 func canPackImages(images: [SourceImage], outputSettings: OutputSettings) -> (Bool, [SourceImage]) {
@@ -59,7 +62,13 @@ class BinPacker {
 
         for source in images {
             if let placement = findPlacement(for: Int(source.width), Int(source.height)) {
-                packedImages.append(PackedImage(name: source.name, image: source.image, frame: placement))
+                packedImages.append(PackedImage(
+                    name: source.name,
+                    path: source.path,
+                    image:source.image,
+                    frame: placement,
+                    svgFill: source.svgFill
+                ))
                 splitFreeRectangles(for: placement)
             } else {
                 print("Image \(source.name) could not be packed.")

@@ -31,6 +31,7 @@ struct PackableImageRow: View {
             Text(packableImage.path).frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             warningIcon.opacity(isWarning ? 1.0 : 0.0)
             ToolbarButton(action: { self.onRemove() }, icon: trashIcon)
+                .opacity(isHovered ? 1.0 : 0.2)
                 //.background(Color.clear)
             /*ToolbarButton(action: { self.onRemove() }, icon: trashIcon)
                 .background(Color(red: 203.0/255.0, green: 43.0/255.0, blue: 43.0/255.0))

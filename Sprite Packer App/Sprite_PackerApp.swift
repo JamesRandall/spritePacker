@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 @main
 struct Sprite_PackerApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
+    @Environment(\.openWindow) private var openWindow
+    
+    @SceneBuilder var body: some Scene {
+        WindowGroup(id: "spritepacker", for: SpritePackerFile.self) { file in
+            ContentView(file: file)
                 .onAppear {
                     if let window = NSApplication.shared.windows.first {
                         DispatchQueue.main.async {
@@ -19,14 +22,28 @@ struct Sprite_PackerApp: App {
                         }
                     }
                 }
-                
+            
         }
         .commands {
             CommandGroup(replacing: .appSettings) {}
             CommandGroup(replacing: .toolbar) {}
             CommandGroup(replacing: .help) {}
+            CommandGroup(after: .newItem) {
+                Button("Open...") {
+                    let panel = NSOpenPanel()
+                    panel.allowedContentTypes = [UTType.json]
+                        panel.allowsMultipleSelection = false
+                        panel.canChooseDirectories = false
+                        
+                        if panel.runModal() == .OK, let url = panel.url {
+                            openWindow(id: "spritepacker", value: SpritePackerFile(imageUrl: url, jsonUrl: url))
+                        }
+                }
+                .keyboardShortcut("O", modifiers: [.command])
+            }
         }
     }
+    
     
     private func configureWindow(_ window: NSWindow) {
         window.titlebarSeparatorStyle = .none
