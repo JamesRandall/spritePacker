@@ -67,7 +67,7 @@ struct CLI : ParsableCommand {
         
         return CommandConfiguration(
             discussion: "This tool will pack images into a single PNG file and generate a JSON index for that file. In addition to the options described here sprite packer will look for a file called sprite-packer.json in the source folder and merge the ones you specify into it. Sample json is shown below:\n\n\(jsonString)\n",
-            version: "1.0.3")
+            version: "1.0.8")
     }
     
     func run() {
@@ -87,5 +87,7 @@ struct CLI : ParsableCommand {
 }
 
 CLI.main()
+//CLI.main(["-s","/Users/jamesrandall/code/starship-tactics/ui-icons"])
+//CLI.main(["--help"])
 
 

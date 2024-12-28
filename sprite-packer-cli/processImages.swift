@@ -25,10 +25,13 @@ func processImages(sourceFolder: String, options: PackerOptions) {
     svgSettings.fill = options.svg.fill?.toColor() ?? Color.black
     
     let outputImageOption = options.output.imagePath ?? "packed.png"
-    let outputImageUrl = outputImageOption.hasPrefix("/") ? URL(fileURLWithPath: outputImageOption) : URL(fileURLWithPath: sourceFolder).appendingPathComponent(outputImageOption.hasPrefix("./") ? String(outputImageOption.dropFirst(2)) : outputImageOption)
+    let outputImageUrl =
+        outputImageOption.hasPrefix("/")
+        ? URL(fileURLWithPath: outputImageOption)
+        : URL(fileURLWithPath: sourceFolder).appendingPathComponent(outputImageOption.hasPrefix("./") ? String(outputImageOption.dropFirst(2)) : outputImageOption)
     
     let packableImages = findFiles(in: sourceFolder, matching: imageTypes)
-        .filter({URL(fileURLWithPath: $0) != outputImageUrl})
+        .filter({URL(fileURLWithPath: $0).absoluteString != outputImageUrl.absoluteString})
         .compactMap({loadImage($0, svgSettings: svgSettings)})
         
     let binWidth = options.output.size.width
